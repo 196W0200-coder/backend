@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyLuckyStats - Configuración de Bookmakers</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #667eea;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover {
+            background: #f8f9ff;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .status-inactive {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .status-recommended {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-success {
+            background: #e8f5e8;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+
+        .alert-error {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Estilos para documentación de API */
+        .api-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .api-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .api-endpoint {
+            background: white;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .api-endpoint:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .method {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-right: 15px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .method.get {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .method.post {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .method.put {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .method.delete {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .api-endpoint code {
+            background: #f5f5f5;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #d63384;
+            font-weight: 600;
+        }
+
+        .api-endpoint p {
+            margin: 10px 0 0 0;
+            color: #666;
+            font-style: italic;
+        }
+
+        .api-example {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f0f8ff;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .api-example a {
+            color: #667eea;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .api-example a:hover {
+            text-decoration: underline;
+        }
+
+        .api-example strong {
+            color: #333;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row, .form-row-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+
+            .api-endpoint {
+                padding: 12px 15px;
+            }
+
+            .method {
+                display: block;
+                margin-bottom: 8px;
+                margin-right: 0;
+            }
+
+            .api-example a {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-chart-line"></i> MyLuckyStats</h1>
+            <p>Configuración de Bookmakers para Aviator</p>
+        </div>
+
+        <div class="alert alert-success" id="successAlert">
+            <i class="fas fa-check-circle"></i> <span id="successMessage"></span>
+        </div>
+
+        <div class="alert alert-error" id="errorAlert">
+            <i class="fas fa-exclamation-circle"></i> <span id="errorMessage"></span>
+        </div>
+
+        <!-- Estadísticas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalBookmakers">0</div>
+                <div class="stat-label">Total Bookmakers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="activeBookmakers">0</div>
+                <div class="stat-label">Activos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="recommendedBookmakers">0</div>
+                <div class="stat-label">Recomendados</div>
+            </div>
+        </div>
+
+        <!-- Documentación de API -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fas fa-code"></i>
+                    Documentación de API
+                </h2>
+                <button class="btn btn-primary" onclick="toggleApiDocs()">
+                    <i class="fas fa-eye"></i>
+                    <span id="toggleApiText">Mostrar Rutas</span>
+                </button>
+            </div>
+            
+            <div id="apiDocumentation" style="display: none;">
+                <div class="api-section">
+                    <h3><i class="fas fa-list"></i> Bookmakers</h3>
+                    <div class="api-endpoint">
+                        <span class="method get">GET</span>
+                        <code>/api/aviator/bookmakers</code>
+                        <p>Obtener todos los bookmakers</p>
+                    </div>
+                    <div class="api-endpoint">
+                        <span class="method get">GET</span>
+                        <code>/api/aviator/bookmakers/:id</code>
+                        <p>Obtener un bookmaker específico</p>
+                    </div>
+                    <div class="api-endpoint">
+                        <span class="method post">POST</span>
+                        <code>/api/aviator/bookmakers</code>
+                        <p>Crear un nuevo bookmaker</p>
+                    </div>
+                    <div class="api-endpoint">
+                        <span class="method put">PUT</span>
+                        <code>/api/aviator/bookmakers/:id</code>
+                        <p>Actualizar un bookmaker</p>
+                    </div>
+                    <div class="api-endpoint">
+                        <span class="method delete">DELETE</span>
+                        <code>/api/aviator/bookmakers/:id</code>
+                        <p>Eliminar un bookmaker</p>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3><i class="fas fa-gamepad"></i> Rondas de Juego</h3>
+                    <div class="api-endpoint">
+                        <span class="method get">GET</span>
+                        <code>/api/aviator/rounds/:bookmakerId</code>
+                        <p>Obtener rondas de un bookmaker específico</p>
+                        <div class="api-example">
+                            <strong>Ejemplo:</strong> 
+                            <a href="http://localhost:3001/api/aviator/rounds/1?limit=1" target="_blank">
+                                http://localhost:3001/api/aviator/rounds/1?limit=1
+                            </a>
+                        </div>
+                    </div>
+                    <div class="api-endpoint">
+                        <span class="method post">POST</span>
+                        <code>/api/aviator/rounds</code>
+                        <p>Crear una nueva ronda</p>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3><i class="fas fa-chart-line"></i> Monitoreo</h3>
+                    <div class="api-endpoint">
+                        <span class="method get">GET</span>
+                        <code>/api/aviator/status</code>
+                        <p>Estado de las conexiones WebSocket</p>
+                    </div>
+                    <div class="api-endpoint">
+                        <span class="method get">GET</span>
+                        <code>/api/aviator/monitoring/dashboard</code>
+                        <p>Estadísticas del dashboard de monitoreo</p>
+                    </div>
+                    <div class="api-endpoint">
+                        <span class="method get">GET</span>
+                        <code>/api/aviator/monitoring/stats</code>
+                        <p>Estadísticas generales de monitoreo</p>
+                    </div>
+                    <div class="api-endpoint">
+                        <span class="method get">GET</span>
+                        <code>/api/aviator/monitoring/available-bookmakers</code>
+                        <p>Bookmakers disponibles con últimos resultados</p>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3><i class="fas fa-history"></i> Historial</h3>
+                    <div class="api-endpoint">
+                        <span class="method get">GET</span>
+                        <code>/api/aviator/history</code>
+                        <p>Historial general de cambios</p>
+                    </div>
+                    <div class="api-endpoint">
+                        <span class="method get">GET</span>
+                        <code>/api/aviator/bookmakers/:id/history</code>
+                        <p>Historial de un bookmaker específico</p>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3><i class="fas fa-heartbeat"></i> Health Check</h3>
+                    <div class="api-endpoint">
+                        <span class="method get">GET</span>
+                        <code>/api/health</code>
+                        <p>Estado del servidor</p>
+                        <div class="api-example">
+                            <strong>Ejemplo:</strong> 
+                            <a href="http://localhost:3001/api/health" target="_blank">
+                                http://localhost:3001/api/health
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3><i class="fas fa-clock"></i> Tiempo del Servidor</h3>
+                    <div class="api-endpoint">
+                        <span class="method get">GET</span>
+                        <code>/api/aviator/server-time</code>
+                        <p>Hora actual del servidor</p>
+                        <div class="api-example">
+                            <strong>Ejemplo:</strong> 
+                            <a href="http://localhost:3001/api/aviator/server-time" target="_blank">
+                                http://localhost:3001/api/aviator/server-time
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-section">
+                    <h3><i class="fas fa-link"></i> URLs Dinámicas</h3>
+                    <p style="margin-bottom: 20px; color: #666;">Ejemplos de URLs específicas basadas en los bookmakers actuales:</p>
+                    <div id="dynamicUrls">
+                        <!-- Las URLs dinámicas se cargarán aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista de Bookmakers -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="fas fa-list"></i>
+                    Lista de Bookmakers
+                </h2>
+                <button class="btn btn-primary" onclick="openModal()">
+                    <i class="fas fa-plus"></i>
+                    Nuevo Bookmaker
+                </button>
+            </div>
+            
+            <div class="loading" id="loadingTable">
+                <div class="spinner"></div>
+                <p>Cargando bookmakers...</p>
+            </div>
+
+            <div class="table-container">
+                <table id="bookmakersTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Recomendado</th>
+                            <th>WebSocket</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookmakersTableBody">
+                        <!-- Los datos se cargarán dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para crear/editar bookmaker -->
+    <div id="bookmakerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Nuevo Bookmaker</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <form id="bookmakerForm">
+                <input type="hidden" id="bookmakerId" name="id">
+                
+                <div class="form-group">
+                    <label for="name">Nombre del Bookmaker *</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Descripción</label>
+                    <textarea id="description" name="description" class="form-control" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="url_image">URL de Imagen</label>
+                    <input type="url" id="url_image" name="url_image" class="form-control">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="recomendado" name="recomendado">
+                            <label for="recomendado">Recomendado</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="active" name="active" checked>
+                            <label for="active">Activo</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="url_websocket">URL WebSocket *</label>
+                    <input type="url" id="url_websocket" name="url_websocket" class="form-control" required 
+                           placeholder="wss://ejemplo.com/websocket">
+                </div>
+
+                <div class="form-group">
+                    <label for="first_message">Primer Mensaje (Base64) *</label>
+                    <textarea id="first_message" name="first_message" class="form-control" rows="2" required
+                              placeholder="Mensaje codificado en Base64"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="second_message">Segundo Mensaje (Base64) *</label>
+                    <textarea id="second_message" name="second_message" class="form-control" rows="2" required
+                              placeholder="Mensaje codificado en Base64"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="third_message">Tercer Mensaje (Base64) *</label>
+                    <textarea id="third_message" name="third_message" class="form-control" rows="2" required
+                              placeholder="Mensaje codificado en Base64"></textarea>
+                </div>
+
+                <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px;">
+                    <button type="button" class="btn" onclick="closeModal()" style="background: #6c757d; color: white;">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        <span id="submitButtonText">Guardar</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let bookmakers = [];
+        let editingId = null;
+
+        // Cargar bookmakers al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBookmakers();
+        });
+
+        // Cargar lista de bookmakers
+        async function loadBookmakers() {
+            try {
+                showLoading(true);
+                const response = await fetch('/api/aviator/bookmakers');
+                bookmakers = await response.json();
+                renderBookmakers();
+                updateStats();
+            } catch (error) {
+                showError('Error al cargar los bookmakers: ' + error.message);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Mostrar/ocultar loading
+        function showLoading(show) {
+            document.getElementById('loadingTable').style.display = show ? 'block' : 'none';
+        }
+
+        // Renderizar tabla de bookmakers
+        function renderBookmakers() {
+            const tbody = document.getElementById('bookmakersTableBody');
+            tbody.innerHTML = '';
+
+            bookmakers.forEach(bookmaker => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${bookmaker.id}</td>
+                    <td><strong>${bookmaker.name}</strong></td>
+                    <td>${bookmaker.description || '-'}</td>
+                    <td>
+                        <span class="status-badge ${bookmaker.active ? 'status-active' : 'status-inactive'}">
+                            ${bookmaker.active ? 'Activo' : 'Inactivo'}
+                        </span>
+                    </td>
+                    <td>
+                        ${bookmaker.recomendado ? 
+                            '<span class="status-badge status-recommended">Recomendado</span>' : 
+                            '-'
+                        }
+                    </td>
+                    <td>
+                        <span style="font-family: monospace; font-size: 0.8rem;">
+                            ${bookmaker.url_websocket ? 'Conectado' : 'No configurado'}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="actions">
+                            <button class="btn btn-warning btn-sm" onclick="editBookmaker(${bookmaker.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteBookmaker(${bookmaker.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Actualizar estadísticas
+        function updateStats() {
+            const total = bookmakers.length;
+            const active = bookmakers.filter(b => b.active).length;
+            const recommended = bookmakers.filter(b => b.recomendado).length;
+
+            document.getElementById('totalBookmakers').textContent = total;
+            document.getElementById('activeBookmakers').textContent = active;
+            document.getElementById('recommendedBookmakers').textContent = recommended;
+            
+            // Actualizar URLs dinámicas
+            updateDynamicUrls();
+        }
+
+        // Actualizar URLs dinámicas
+        function updateDynamicUrls() {
+            const dynamicUrlsContainer = document.getElementById('dynamicUrls');
+            if (!dynamicUrlsContainer) return;
+
+            let html = '';
+            
+            bookmakers.forEach(bookmaker => {
+                const baseUrl = 'http://localhost:3001';
+                
+                html += `
+                    <div class="api-endpoint">
+                        <h4 style="margin: 0 0 10px 0; color: #333;">${bookmaker.name} (ID: ${bookmaker.id})</h4>
+                        <div style="display: grid; gap: 10px;">
+                            <div class="api-example">
+                                <strong>Rondas:</strong> 
+                                <a href="${baseUrl}/api/aviator/rounds/${bookmaker.id}?limit=1" target="_blank">
+                                    ${baseUrl}/api/aviator/rounds/${bookmaker.id}?limit=1
+                                </a>
+                            </div>
+                            <div class="api-example">
+                                <strong>Detalles:</strong> 
+                                <a href="${baseUrl}/api/aviator/bookmakers/${bookmaker.id}" target="_blank">
+                                    ${baseUrl}/api/aviator/bookmakers/${bookmaker.id}
+                                </a>
+                            </div>
+                            <div class="api-example">
+                                <strong>Historial:</strong> 
+                                <a href="${baseUrl}/api/aviator/bookmakers/${bookmaker.id}/history" target="_blank">
+                                    ${baseUrl}/api/aviator/bookmakers/${bookmaker.id}/history
+                                </a>
+                            </div>
+                            <div class="api-example">
+                                <strong>Monitoreo:</strong> 
+                                <a href="${baseUrl}/api/aviator/monitoring/result-status/${bookmaker.id}" target="_blank">
+                                    ${baseUrl}/api/aviator/monitoring/result-status/${bookmaker.id}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            dynamicUrlsContainer.innerHTML = html;
+        }
+
+        // Abrir modal
+        function openModal(bookmaker = null) {
+            const modal = document.getElementById('bookmakerModal');
+            const form = document.getElementById('bookmakerForm');
+            const title = document.getElementById('modalTitle');
+            const submitText = document.getElementById('submitButtonText');
+
+            if (bookmaker) {
+                editingId = bookmaker.id;
+                title.textContent = 'Editar Bookmaker';
+                submitText.textContent = 'Actualizar';
+                fillForm(bookmaker);
+            } else {
+                editingId = null;
+                title.textContent = 'Nuevo Bookmaker';
+                submitText.textContent = 'Guardar';
+                form.reset();
+                document.getElementById('active').checked = true;
+            }
+
+            modal.style.display = 'block';
+        }
+
+        // Llenar formulario para edición
+        function fillForm(bookmaker) {
+            document.getElementById('bookmakerId').value = bookmaker.id;
+            document.getElementById('name').value = bookmaker.name || '';
+            document.getElementById('description').value = bookmaker.description || '';
+            document.getElementById('url_image').value = bookmaker.url_image || '';
+            document.getElementById('recomendado').checked = bookmaker.recomendado || false;
+            document.getElementById('active').checked = bookmaker.active !== false;
+            document.getElementById('url_websocket').value = bookmaker.url_websocket || '';
+            document.getElementById('first_message').value = bookmaker.first_message || '';
+            document.getElementById('second_message').value = bookmaker.second_message || '';
+            document.getElementById('third_message').value = bookmaker.third_message || '';
+        }
+
+        // Cerrar modal
+        function closeModal() {
+            document.getElementById('bookmakerModal').style.display = 'none';
+            document.getElementById('bookmakerForm').reset();
+            editingId = null;
+        }
+
+        // Editar bookmaker
+        function editBookmaker(id) {
+            const bookmaker = bookmakers.find(b => b.id === id);
+            if (bookmaker) {
+                openModal(bookmaker);
+            }
+        }
+
+        // Eliminar bookmaker
+        async function deleteBookmaker(id) {
+            if (!confirm('¿Estás seguro de que quieres eliminar este bookmaker?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/aviator/bookmakers/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    showSuccess('Bookmaker eliminado correctamente');
+                    loadBookmakers();
+                } else {
+                    throw new Error('Error al eliminar el bookmaker');
+                }
+            } catch (error) {
+                showError('Error al eliminar el bookmaker: ' + error.message);
+            }
+        }
+
+        // Manejar envío del formulario
+        document.getElementById('bookmakerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Convertir checkboxes a boolean
+            data.recomendado = data.recomendado === 'on';
+            data.active = data.active === 'on';
+
+            try {
+                let response;
+                if (editingId) {
+                    // Actualizar
+                    response = await fetch(`/api/aviator/bookmakers/${editingId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+                } else {
+                    // Crear
+                    response = await fetch('/api/aviator/bookmakers', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+                }
+
+                if (response.ok) {
+                    showSuccess(editingId ? 'Bookmaker actualizado correctamente' : 'Bookmaker creado correctamente');
+                    closeModal();
+                    loadBookmakers();
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Error al guardar el bookmaker');
+                }
+            } catch (error) {
+                showError('Error al guardar el bookmaker: ' + error.message);
+            }
+        });
+
+        // Mostrar mensaje de éxito
+        function showSuccess(message) {
+            const alert = document.getElementById('successAlert');
+            const messageSpan = document.getElementById('successMessage');
+            messageSpan.textContent = message;
+            alert.style.display = 'block';
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+
+        // Mostrar mensaje de error
+        function showError(message) {
+            const alert = document.getElementById('errorAlert');
+            const messageSpan = document.getElementById('errorMessage');
+            messageSpan.textContent = message;
+            alert.style.display = 'block';
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('bookmakerModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Toggle documentación de API
+        function toggleApiDocs() {
+            const apiDocs = document.getElementById('apiDocumentation');
+            const toggleText = document.getElementById('toggleApiText');
+            
+            if (apiDocs.style.display === 'none') {
+                apiDocs.style.display = 'block';
+                toggleText.textContent = 'Ocultar Rutas';
+            } else {
+                apiDocs.style.display = 'none';
+                toggleText.textContent = 'Mostrar Rutas';
+            }
+        }
+    </script>
+</body>
+</html>
