@@ -2,11 +2,11 @@ const { Pool } = require('pg');
 
 // Configuración de la base de datos para Render
 const dbConfig = {
-  user: process.env.DATABASE_USER || 'data_test_g0gq_user',
-  host: process.env.DATABASE_HOST || 'dpg-d3bg1uripnbc73fr9v0g-a.oregon-postgres.render.com',
-  database: process.env.DATABASE_NAME || 'data_test_g0gq',
-  password: process.env.DATABASE_PASSWORD || 'LwctchY8WNKsCyaiAOSs1cQzJQ042NFl',
-  port: process.env.DATABASE_PORT || 5432,
+  user: process.env.DATABASE_USER || 'postgres',
+  host: process.env.DATABASE_HOST || 'interchange.proxy.rlwy.net',
+  database: process.env.DATABASE_NAME || 'railway',
+  password: process.env.DATABASE_PASSWORD || 'lhcvYzvMJQJZrfinsIxMuXaeXuvaistQ',
+  port: process.env.DATABASE_PORT || 18949,
   ssl: {
     rejectUnauthorized: false
   },
