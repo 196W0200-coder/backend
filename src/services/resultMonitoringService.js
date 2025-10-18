@@ -104,7 +104,7 @@ class ResultMonitoringService {
   // Obtener último resultado de la API
   async fetchLastResult(bookmakerId) {
     try {
-      const response = await fetch(`https://backend-b4p6.onrender.com/api/aviator/rounds/${bookmakerId}?limit=1`);
+      const response = await fetch(`http://backend-b4p6.onrender.com/api/aviator/rounds/${bookmakerId}?limit=1`);
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
@@ -215,4 +215,5 @@ class ResultMonitoringService {
 }
 
 module.exports = new ResultMonitoringService();
+
 
